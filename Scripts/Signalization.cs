@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(BoxCollider))]
-[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(BoxCollider), typeof(AudioSource))]
+
 public class Signalization : MonoBehaviour
 {
     private AudioSource _soundtrack;   
-    private float _respond = 0.2f;
+    private float _respond = 0.5f;
 
     void Start()
     {
@@ -37,7 +37,7 @@ public class Signalization : MonoBehaviour
         {
             while (_soundtrack.volume != 1)
             {
-                _soundtrack.volume += Mathf.Lerp(0, 1, Time.deltaTime);
+                _soundtrack.volume += Mathf.Lerp(0, 1, Time.deltaTime * _respond);
                 yield return new WaitForSeconds(Time.deltaTime);
             }
         }
@@ -45,7 +45,7 @@ public class Signalization : MonoBehaviour
         {
             while (_soundtrack.volume != 0)
             {
-                _soundtrack.volume -= Mathf.Lerp(0, 1, Time.deltaTime);                
+                _soundtrack.volume -= Mathf.Lerp(0, 1, Time.deltaTime * _respond);                
                 yield return new WaitForSeconds(Time.deltaTime);
             }
             _soundtrack.Pause();

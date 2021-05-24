@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(PlayerMover))]
+[RequireComponent(typeof(Animator), typeof(PlayerMover))]
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private PlayerMover _mover;
-    [SerializeField] private Animator _animator;
+
+    private Animator _animator;
 
     private void Start()
     {
